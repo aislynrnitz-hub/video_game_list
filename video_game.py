@@ -21,8 +21,16 @@ while True:
 #Prints the information for the game that the user chooses
 print(video_data.iloc[chosen_game])
 
-#Allows the user to input a new status for the game that they previously chose
-new_status = input("Enter a new status: ")
+#Allows the user to input a valid status for the game that they previously chose
+#Will check to make sure the status is one of the four given statuses.
+valid_statuses = {"backlog", "playing", "completed", "dropped"}
+while True:
+    new_status = input("Enter a new status: ").lower()
+    if new_status in valid_statuses:
+        new_status = new_status.capitalize()
+        break
+    print("Invalid. Please enter Backlog, Playing, Completed, or Dropped.")
+
 video_data.at[chosen_game, "Status"] = new_status
 
 #Creates a new recommended column and sets it automatically to "No". Then it looks and finds the games that have
